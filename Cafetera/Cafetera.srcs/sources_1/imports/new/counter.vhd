@@ -20,8 +20,7 @@
 
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_1164.ALL;
 use ieee.numeric_std.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -34,7 +33,7 @@ use ieee.numeric_std.ALL;
 
 entity counter is
     Port ( 
-           clk : in std_logic;
+           CLK : in std_logic;
            CE : in std_logic;
            RST_N : in std_logic;
            code : out std_logic_vector(3 downto 0)
@@ -45,15 +44,15 @@ architecture Behavioral of counter is
     signal code_i : unsigned(code'range);
    
 begin
-    process(clk, RST_N)
-begin
-    if RST_N = '0' then
-    code_i <= (others => '0');
-    elsif rising_edge(clk) then 
-        if CE = '1' then 
-         code_i <= code_i +1;
-    end if;
-    end if;
+    process(CLK, RST_N)
+    begin
+        if RST_N = '0' then
+            code_i <= (others => '0');
+        elsif rising_edge(CLK) then 
+            if CE = '1' then 
+            code_i <= code_i +1;
+            end if;
+        end if;
     end process;
-   code <= std_logic_vector(code_i);
+    code <= std_logic_vector(code_i);
 end Behavioral;
