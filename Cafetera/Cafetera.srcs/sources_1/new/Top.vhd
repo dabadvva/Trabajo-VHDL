@@ -38,9 +38,8 @@ entity Top is
            Corto : in std_logic;
            P_ON : in std_logic;
            RESET : in std_logic;
-           CLK : in std_logic;
+           clk : in std_logic; --se cambia para que la señal de reloj global sea clk
            Leche : in std_logic;
-           --Cafe : out std_logic; --Esta señal es posible que no la necesitemos
            Bomba : out std_logic;
            LED : out std_logic;
            Valvula :  out std_logic 
@@ -73,37 +72,54 @@ architecture Structural of Top is --definición básica de los componentes top, 
            );
           end component;
         
-signal synch_det: std_logic; --señales pendientes de cambiar
-signal det_count: std_logic; 
-signal count_dec: std_logic_vector(3 downto 0);         
+signal sync_in_L: std_logic; --café largo
+signal sync_in_C: std_logic; --café corto
+signal edge_in_L: std_logic; 
+signal edge_in_C: std_logic; 
+signal code_in: std_logic_vector(3 downto 0);
           
 begin
 
-inst_sinch: SYNCHRNZR port map( 
-    clk => clk, 
-    async_in => button, 
-    sync_out => synch_det 
+ --tenemos dos entradas asíncronas, luego, necesitamos dos instancias:
+inst_sinch_L: SYNCHRNZR port map( 
+    CLK => clk, 
+    ASYNC_IN => Largo,--para el caso de café largo
+    SYNC_OUT => sync_in_L 
+); 
+
+inst_sinch_C: SYNCHRNZR port map( 
+    CLK => clk, 
+    ASYNC_IN => Corto,--para el caso de café corto
+    SYNC_OUT => sync_in_C 
 ); 
  
-inst_detct: EDGEDTCTR  port map ( 
-            clk => clk, 
-            SYNC_IN => synch_det, 
-            EDGE => det_count 
+inst_detct_L: EDGEDTCTR  port map ( 
+            CLK => clk, 
+            SYNC_IN => sync_in_L, 
+            EDGE => edge_in_L 
+        ); 
+        
+inst_detct_C: EDGEDTCTR  port map ( 
+            CLK => clk, 
+            SYNC_IN => sync_in_C, 
+            EDGE => edge_in_C 
         ); 
          
-inst_counter: counter PORT MAP ( 
-            clk => clk, 
-            ce => det_count, 
-            code => count_dec, 
-            reset => reset 
+inst_counter_L: counter PORT MAP ( 
+            CLK => clk, 
+            CE => edge_in_L, 
+            code => code_in, --falta revisar estas señales de salida
+            RST_N => reset --el reset se implementa en el counter?
         ); 
  
-inst_decoder: decoder PORT MAP( 
-    code => count_dec, 
-    led => segment 
-    ); 
- 
-digctrl <= not digsel; 
-
+inst_counter_C: counter PORT MAP ( 
+            CLK => clk, 
+            CE => edge_in_C, 
+            code => code_in, 
+            RST_N => reset --el reset se implementa en el counter?
+        ); 
+        
+         
+--digctrl <= not digsel; --necesidad real de esta señal?
 
 end Structural;
