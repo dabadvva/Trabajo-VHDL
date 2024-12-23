@@ -34,7 +34,8 @@ use IEEE.std_logic_unsigned.ALL;
 --use UNISIM.VComponents.all;
 
 entity Top is
-    Port ( Largo : in std_logic;
+    Port ( 
+           Largo : in std_logic;
            Corto : in std_logic;
            P_ON : in std_logic;
            RESET : in std_logic;
