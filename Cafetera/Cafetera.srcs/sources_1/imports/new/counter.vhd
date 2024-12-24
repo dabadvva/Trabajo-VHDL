@@ -36,7 +36,7 @@ entity counter is
            CLK : in std_logic;
            CE : in std_logic;
            RST_N : in std_logic;
-           code : out std_logic_vector(3 downto 0)
+           code : out std_logic_vector(5 downto 0) --Se cambia a 6b para que pueda contar hasta 50
            );
 end counter;
 
