@@ -1,1 +1,4 @@
 Time resolution is 1 ps
+Failure: [SUCCESS]: simulation finished.
+Time: 6486 ms  Iteration: 0  Process: /SYNCHRNZR_tb/stimuli  File: C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera/Cafetera.srcs/sim_1/new/SYNCHRNZR_tb.vhd
+$finish called at time : 6486 ms : File "C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera/Cafetera.srcs/sim_1/new/SYNCHRNZR_tb.vhd" Line 73
