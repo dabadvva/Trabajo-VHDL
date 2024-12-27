@@ -35,19 +35,29 @@ use ieee.numeric_std.ALL;
 entity SYNCHRNZR is
     port (
         CLK : in std_logic;
-        ASYNC_IN : in std_logic;
-        SYNC_OUT : out std_logic
+        ASYNC_IN : in std_logic_vector(2 downto 0); --leche + largo + corto
+        SYNC_OUT : out std_logic_vector(2 downto 0)
     );
 end SYNCHRNZR;
 
 architecture BEHAVIORAL of SYNCHRNZR is
-    signal sreg : std_logic_vector(1 downto 0);
+    signal sreg_C : std_logic_vector(1 downto 0);  --corto
+    signal sreg_L : std_logic_vector(1 downto 0);   --largo
+    signal sreg_le : std_logic_vector(1 downto 0);  --leche
 begin
     process (CLK)
     begin
-        if rising_edge(CLK) then
-            sync_out <= sreg(1);
-            sreg <= sreg(0) & async_in;
+        if rising_edge(CLK) then 
+        
+        SYNC_OUT(0) <= sreg_C(1);          -- Asignar la salida sincronizada para "corto"
+        sreg_C <= sreg_C(0) & ASYNC_IN(0);  -- Actualizar el registro de "corto"
+
+        SYNC_OUT(1) <= sreg_L(1);          -- Asignar la salida sincronizada para "largo"
+        sreg_L <= sreg_L(0) & ASYNC_IN(1);  -- Actualizar el registro de "largo"
+
+        SYNC_OUT(2) <= sreg_le(1);           -- Asignar la salida sincronizada para "leche"
+        sreg_le <= sreg_le(0) & ASYNC_IN(2); -- Actualizar el registro de "leche"
+
         end if;
     end process;
 end BEHAVIORAL;
