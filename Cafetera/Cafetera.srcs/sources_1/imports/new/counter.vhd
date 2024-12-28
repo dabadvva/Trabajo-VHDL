@@ -35,9 +35,8 @@ entity counter is
        CLK : in std_logic;
        CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
        RST_N : in std_logic;
-       code : out std_logic_vector(5 downto 0); --Se cambia a 6b para que pueda contar hasta 50
-       EVENT_DONE : out std_logic; --el led se enciende cuando se termina el tiempo de hacer un café ?
-       valvula: out std_logic
+       code : out std_logic_vector(7 downto 0); --Se cambia a 8b para que pueda contar hasta 150
+       EVENT_DONE : out std_logic --el led se enciende cuando se termina el tiempo de hacer un café ?
     );
 end counter;
 
@@ -45,19 +44,19 @@ architecture Behavioral of counter is
     signal code_i : unsigned(code'range);
     signal enable : std_logic ;
     
-    constant MAX_COUNT_C : unsigned(code'range) := "001010"; -- cuenta hasta 10 en cafe corto
-    constant MAX_COUNT_L : unsigned(code'range) := "010100"; -- cuenta hasta 20 en cafe largo
-    constant MAX_COUNT_Le : unsigned(code'range) := "011110"; -- cuenta hasta 30 en leche
+    constant MAX_COUNT_C : unsigned(code'range) := "110010"; -- cuenta hasta 10 en cafe corto
+    constant MAX_COUNT_L : unsigned(code'range) := "1100100"; -- cuenta hasta 20 en cafe largo
+    constant MAX_COUNT_Le : unsigned(code'range) := "10010110"; -- cuenta hasta 30 en leche
+    --Ojo, las cuentas no se están realizando en decimal, con un periodo de 100ms, que es el que utilizamos,
+    --tras 50 rising edge se cumplen 10s, en decimal 50 es 110010, y así con los demás 
 begin
     enable <= CE(0) or CE(1) or CE(2); -- Combina las señales de entrada, si una está activa, el contador empieza
     process(CLK, RST_N)
     begin
         if RST_N = '0' then --reset del contador
             code_i <= (others => '0');
-            valvula <= '0'; -- La válvula se desactiva al reiniciar
         elsif rising_edge(CLK) then 
             if enable = '1' then 
-            valvula <= '1';--esta señal representa el led que se enciende cuando está activa la válvula
                 case CE is
                     when "001" =>  -- corto, contar hasta 10
                         if code_i < MAX_COUNT_C then
@@ -86,7 +85,6 @@ begin
     
     -- Generación de la señal de evento completado, que podría ser un led 
     EVENT_DONE <= '1' when code_i = MAX_COUNT_L or code_i = MAX_COUNT_C or code_i = MAX_COUNT_Le else '0';
-
     -- Asignación del valor del contador a la salida
     code <= std_logic_vector(code_i);
     
