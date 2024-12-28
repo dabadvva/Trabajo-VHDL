@@ -35,12 +35,12 @@ use IEEE.std_logic_unsigned.ALL;
 
 entity Top is
     Port ( 
-           Largo : in std_logic;
-           Corto : in std_logic;
-           P_ON : in std_logic;
+           Corto : in std_logic; --boton1
+           Largo : in std_logic; --boton2
+           Leche : in std_logic; --boton3
+           P_ON : in std_logic; --boton4
            RESET : in std_logic;
            clk : in std_logic; --se cambia para que la señal de reloj global sea clk
-           Leche : in std_logic;
            Bomba : out std_logic;
            LED : out std_logic;
            Valvula :  out std_logic 
@@ -50,77 +50,62 @@ end Top;
 architecture Structural of Top is --definición básica de los componentes top, se modificará a futuro
           component SYNCHRNZR 
             port (
-                CLK : in std_logic;
-                ASYNC_IN : in std_logic;
-                SYNC_OUT : out std_logic
+               CLK : in std_logic;
+               ASYNC_IN : in std_logic_vector(2 downto 0); --corto + largo + leche
+               SYNC_OUT : out std_logic_vector(2 downto 0)
             );
           end component;
           
           component EDGEDTCTR
             port (
-                CLK : in std_logic;
-                SYNC_IN : in std_logic;
-                EDGE : out std_logic
+               CLK : in std_logic ;
+               SYNC_IN : in std_logic_vector(2 downto 0);
+               EDGE : out std_logic_vector(2 downto 0)
             );
           end component;
           
           component counter
-            port (
-                CLK : in std_logic;
-                CE : in std_logic;
-                RST_N : in std_logic;
-                code : out std_logic_vector(3 downto 0)
-           );
+            port ( 
+               CLK : in std_logic;
+               CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
+               RST_N : in std_logic;
+               code : out std_logic_vector(5 downto 0); --Se cambia a 6b para que pueda contar hasta 50
+               EVENT_DONE : out std_logic; --el led se enciende cuando se termina el tiempo de hacer un café ?
+               valvula: out std_logic 
+            );
           end component;
         
-signal sync_in_L: std_logic; --café largo
-signal sync_in_C: std_logic; --café corto
-signal edge_in_L: std_logic; 
-signal edge_in_C: std_logic; 
-signal code_in: std_logic_vector(3 downto 0);
+signal buttons_combined : std_logic_vector(2 downto 0);        
+signal sync_in: std_logic_vector(2 downto 0); 
+signal edge_in: std_logic_vector(2 downto 0); 
+signal code_in: std_logic_vector(5 downto 0); --no se usa en principio
           
 begin
 
- --tenemos dos entradas asíncronas, luego, necesitamos dos instancias:
-inst_sinch_L: SYNCHRNZR port map( 
-    CLK => clk, 
-    ASYNC_IN => Largo,--para el caso de café largo
-    SYNC_OUT => sync_in_L 
-); 
+buttons_combined(0) <= Corto;  -- Asignamos el primer botón al primer bit
+buttons_combined(1) <= Largo;  -- Asignamos el segundo botón al segundo bit
+buttons_combined(2) <= Leche;  -- Asignamos el tercer botón al tercer bit
 
-inst_sinch_C: SYNCHRNZR port map( 
-    CLK => clk, 
-    ASYNC_IN => Corto,--para el caso de café corto
-    SYNC_OUT => sync_in_C 
-); 
- 
-inst_detct_L: EDGEDTCTR  port map ( 
+inst_sinch: SYNCHRNZR port map( 
             CLK => clk, 
-            SYNC_IN => sync_in_L, 
-            EDGE => edge_in_L 
+            ASYNC_IN => buttons_combined,
+            SYNC_OUT => sync_in 
         ); 
-        
-inst_detct_C: EDGEDTCTR  port map ( 
+
+inst_detct: EDGEDTCTR  port map ( 
             CLK => clk, 
-            SYNC_IN => sync_in_C, 
-            EDGE => edge_in_C 
+            SYNC_IN => sync_in, 
+            EDGE => edge_in 
         ); 
          
-inst_counter_L: counter PORT MAP ( 
+inst_counter: counter PORT MAP ( 
             CLK => clk, 
-            CE => edge_in_L, 
-            code => code_in, --falta revisar estas señales de salida
-            RST_N => reset --el reset se implementa en el counter?
+            CE => edge_in, 
+            RST_N => RESET, --el reset se implementa en el counter
+            valvula => Valvula,
+            EVENT_DONE => LED
         ); 
- 
-inst_counter_C: counter PORT MAP ( 
-            CLK => clk, 
-            CE => edge_in_C, 
-            code => code_in, 
-            RST_N => reset --el reset se implementa en el counter?
-        ); 
-        
-         
+      
 --digctrl <= not digsel; --necesidad real de esta señal?
 
 end Structural;

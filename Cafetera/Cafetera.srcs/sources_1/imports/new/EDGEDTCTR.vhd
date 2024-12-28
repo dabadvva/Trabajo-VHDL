@@ -53,26 +53,32 @@ use ieee.numeric_std.ALL;
 --use UNISIM.VComponents.all;
 
 entity EDGEDTCTR is
-    Port (
-           CLK : in STD_LOGIC;
-           SYNC_IN : in STD_LOGIC;
-           EDGE : out STD_LOGIC
-           );
+    port (
+       CLK : in std_logic ;
+       SYNC_IN : in std_logic_vector(2 downto 0);
+       EDGE : out std_logic_vector(2 downto 0)
+    );
 end EDGEDTCTR;
 
 architecture BEHAVIORAL of EDGEDTCTR is
-     signal sreg : std_logic_vector(2 downto 0);
+    signal sreg_C : std_logic_vector(1 downto 0);  --corto
+    signal sreg_L : std_logic_vector(1 downto 0);   --largo
+    signal sreg_le : std_logic_vector(1 downto 0);  --leche
 begin
      process (CLK)
      begin
         if rising_edge(CLK) then
-        sreg <= sreg(1 downto 0) & SYNC_IN;
+            -- Actualización de los registros para cada señal
+            sreg_C <= sreg_C(0) & SYNC_IN(0); -- "corto"
+            sreg_L <= sreg_L(0) & SYNC_IN(1); -- "largo"
+            sreg_le <= sreg_le(0) & SYNC_IN(2); -- "leche"
         end if;
      end process;
      
-     with sreg select
-        EDGE <= '1' when "100",
-        '0' when others;
+     -- Evaluación de flancos descendentes para cada señal
+     EDGE(0) <= '1' when sreg_C = "10" else '0'; -- "corto" 
+     EDGE(1) <= '1' when sreg_L = "10" else '0'; -- "largo"    posibles errores??
+     EDGE(2) <= '1' when sreg_le = "10" else '0'; -- "leche"
 
 end BEHAVIORAL;
 

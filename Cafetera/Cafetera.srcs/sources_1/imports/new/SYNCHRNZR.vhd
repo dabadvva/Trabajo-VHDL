@@ -34,9 +34,9 @@ use ieee.numeric_std.ALL;
 
 entity SYNCHRNZR is
     port (
-        CLK : in std_logic;
-        ASYNC_IN : in std_logic_vector(2 downto 0); --leche + largo + corto
-        SYNC_OUT : out std_logic_vector(2 downto 0)
+       CLK : in std_logic;
+       ASYNC_IN : in std_logic_vector(2 downto 0); --leche + largo + corto
+       SYNC_OUT : out std_logic_vector(2 downto 0)
     );
 end SYNCHRNZR;
 

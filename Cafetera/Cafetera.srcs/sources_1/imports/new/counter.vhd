@@ -30,29 +30,64 @@ use ieee.numeric_std.ALL;
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
-
 entity counter is
-    Port ( 
-           CLK : in std_logic;
-           CE : in std_logic;
-           RST_N : in std_logic;
-           code : out std_logic_vector(5 downto 0) --Se cambia a 6b para que pueda contar hasta 50
-           );
+    port ( 
+       CLK : in std_logic;
+       CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
+       RST_N : in std_logic;
+       code : out std_logic_vector(5 downto 0); --Se cambia a 6b para que pueda contar hasta 50
+       EVENT_DONE : out std_logic; --el led se enciende cuando se termina el tiempo de hacer un café ?
+       valvula: out std_logic
+    );
 end counter;
 
 architecture Behavioral of counter is
     signal code_i : unsigned(code'range);
-   
+    signal enable : std_logic ;
+    
+    constant MAX_COUNT_C : unsigned(code'range) := "001010"; -- cuenta hasta 10 en cafe corto
+    constant MAX_COUNT_L : unsigned(code'range) := "010100"; -- cuenta hasta 20 en cafe largo
+    constant MAX_COUNT_Le : unsigned(code'range) := "011110"; -- cuenta hasta 30 en leche
 begin
+    enable <= CE(0) or CE(1) or CE(2); -- Combina las señales de entrada, si una está activa, el contador empieza
     process(CLK, RST_N)
     begin
-        if RST_N = '0' then
+        if RST_N = '0' then --reset del contador
             code_i <= (others => '0');
+            valvula <= '0'; -- La válvula se desactiva al reiniciar
         elsif rising_edge(CLK) then 
-            if CE = '1' then 
-            code_i <= code_i +1;
+            if enable = '1' then 
+            valvula <= '1';--esta señal representa el led que se enciende cuando está activa la válvula
+                case CE is
+                    when "001" =>  -- corto, contar hasta 10
+                        if code_i < MAX_COUNT_C then
+                            code_i <= code_i + 1;  -- Incrementa el contador
+                        else 
+                            code_i <= (others => '0');  -- Reinicia al alcanzar el máximo
+                        end if;
+                    when "010" =>  -- largo, contar hasta 20
+                        if code_i < MAX_COUNT_L then
+                            code_i <= code_i + 1;
+                        else 
+                            code_i <= (others => '0');
+                        end if;
+                    when "100" =>  -- leche, contar hasta 30
+                        if code_i < MAX_COUNT_Le then
+                            code_i <= code_i + 1;
+                        else 
+                            code_i <= (others => '0');
+                        end if;
+                    when others =>  -- Si CE no es ninguno de los anteriores, no contar
+                        code_i <= code_i;  -- Mantiene el contador en su valor actual
+                end case;
             end if;
         end if;
     end process;
+    
+    -- Generación de la señal de evento completado, que podría ser un led 
+    EVENT_DONE <= '1' when code_i = MAX_COUNT_L or code_i = MAX_COUNT_C or code_i = MAX_COUNT_Le else '0';
+
+    -- Asignación del valor del contador a la salida
     code <= std_logic_vector(code_i);
+    
 end Behavioral;
