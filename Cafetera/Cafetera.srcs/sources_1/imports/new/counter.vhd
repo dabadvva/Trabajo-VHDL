@@ -33,7 +33,7 @@ use ieee.numeric_std.ALL;
 entity counter is
     port ( 
        CLK : in std_logic;
-       CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
+       CE : in std_logic_vector(3 downto 0); -- el counter enable activa el contador
        RST_N : in std_logic;
        code : out std_logic_vector(7 downto 0); --Se cambia a 8b para que pueda contar hasta 150
        EVENT_DONE : out std_logic --el led se enciende cuando se termina el tiempo de hacer un café ?
