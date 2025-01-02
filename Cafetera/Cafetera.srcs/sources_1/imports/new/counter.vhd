@@ -41,12 +41,12 @@ entity counter is
 end counter;
 
 architecture Behavioral of counter is
-    signal code_i : unsigned(code'range);
+    signal code_i : unsigned(7 downto 0);
     signal enable : std_logic ;
     
-    constant MAX_COUNT_C : unsigned(code'range) := "110010"; -- cuenta hasta 10 en cafe corto
-    constant MAX_COUNT_L : unsigned(code'range) := "1100100"; -- cuenta hasta 20 en cafe largo
-    constant MAX_COUNT_Le : unsigned(code'range) := "10010110"; -- cuenta hasta 30 en leche
+    constant MAX_COUNT_C : unsigned(5 downto 0) := "110010";-- cuenta hasta 10 en cafe corto
+    constant MAX_COUNT_L : unsigned(6 downto 0) := "1100100"; -- cuenta hasta 20 en cafe largo
+    constant MAX_COUNT_Le : unsigned(7 downto 0) := "10010110"; -- cuenta hasta 30 en leche
     --Ojo, las cuentas no se están realizando en decimal, con un periodo de 100ms, que es el que utilizamos,
     --tras 50 rising edge se cumplen 10s, en decimal 50 es 110010, y así con los demás 
 begin

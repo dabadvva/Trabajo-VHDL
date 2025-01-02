@@ -52,7 +52,7 @@ architecture Behavioral of Top is --definición básica de los componentes top, 
 signal buttons_combined : std_logic_vector(3 downto 0);        
 signal sync_in: std_logic_vector(3 downto 0); 
 signal edge_in: std_logic_vector(3 downto 0); 
-signal code_in: std_logic_vector(5 downto 0); --no se usa en principio
+signal code_in: std_logic_vector(7 downto 0); --no se usa en principio
 
           component SYNCHRNZR 
             port (
@@ -73,7 +73,7 @@ signal code_in: std_logic_vector(5 downto 0); --no se usa en principio
           component counter
             port ( 
                CLK : in std_logic;
-               CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
+               CE : in std_logic_vector(3 downto 0); -- el counter enable activa el contador
                RST_N : in std_logic;
                code : out std_logic_vector(7 downto 0); --Se cambia a 6b para que pueda contar hasta 50
                EVENT_DONE : out std_logic --el led se enciende cuando se termina el tiempo de hacer un café ?
