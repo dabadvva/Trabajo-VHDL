@@ -48,16 +48,31 @@ architecture Behavioral of counter is
     constant MAX_COUNT_Le : unsigned(7 downto 0) := "10010110"; -- cuenta hasta 30 en leche
     --Ojo, las cuentas no se están realizando en decimal, con un periodo de 100ms, que es el que
     --utilizamos, tras 50 rising edge se cumplen 10s, en decimal 50 es 110010, y así con los demás 
+    
 begin
     enable <= CE(0) or CE(1) or CE(2); -- Combina las señales de entrada, si una está activa, el contador empieza
+    
     process(CLK, RST_N)
-    variable evnt : std_logic ;
+        variable evnt : std_logic ;
+        variable CE_latched_var : std_logic_vector(2 downto 0) := "000"; -- Variable para almacenar el último valor de CE
+        variable enable_latched_var : std_logic := '0'; -- Variable para almacenar el estado de enable
     begin
         if RST_N = '0' then --reset del contador
             code_i <=(others => '0');
+            enable_latched_var := '0'; -- Reinicia la variable en un reset
+            CE_latched_var := "000"; -- Reinicia el valor latched de CE
+            EVENT_DONE <= '0';
+
         elsif rising_edge(CLK) then 
-            if enable = '1'  then 
-                case CE is
+            -- Lógica para mantener enable_latched activa
+            if enable = '1' then
+                 enable_latched_var := '1'; -- Engancha la señal si se presiona un botón
+                 CE_latched_var := CE; -- Almacena el último valor válido de CE
+            end if;
+        
+            -- Lógica del contador        
+            if enable_latched_var = '1'  then 
+                case CE_latched_var is
                     when "001" =>  -- corto, contar hasta 10
                         if code_i < ("00" & MAX_COUNT_C) then
                             code_i <= code_i + 1;  -- Incrementa el contador
