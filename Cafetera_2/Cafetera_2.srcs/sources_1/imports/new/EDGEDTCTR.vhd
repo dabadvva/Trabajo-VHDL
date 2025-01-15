@@ -73,15 +73,16 @@ begin
             sreg_C <= sreg_C(0) & SYNC_IN(0); -- "corto"
             sreg_L <= sreg_L(0) & SYNC_IN(1); -- "largo"
             sreg_le <= sreg_le(0) & SYNC_IN(2); -- "leche"
-            sreg_rst <= sreg_rst(0) & SYNC_IN(3); -- "reset"
+           -- sreg_rst <= sreg_rst(0) & SYNC_IN(3); -- "reset"
+           --El reset no hace falta pasarlo por el detector
         end if;
      end process;
      
      -- Evaluación de flancos descendentes para cada señal
      EDGE(0) <= '1' when sreg_C = "10" else '0'; -- "corto" 
-     EDGE(1) <= '1' when sreg_L = "10" else '0'; -- "largo"    posibles errores??
+     EDGE(1) <= '1' when sreg_L = "10" else '0'; -- "largo"    
      EDGE(2) <= '1' when sreg_le = "10" else '0'; -- "leche"
-     EDGE(3) <= '1' when sreg_rst = "10" else '0'; -- "reset"
+    -- EDGE(3) <= '1' when sreg_rst = "10" else '0'; -- "reset"
      
 end BEHAVIORAL;
 

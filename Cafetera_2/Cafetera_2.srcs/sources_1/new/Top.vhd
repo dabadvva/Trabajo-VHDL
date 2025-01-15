@@ -49,7 +49,7 @@ end Top;
 
 architecture Behavioral of Top is --definición básica de los componentes top, se modificará a futuro
 
-signal buttons_combined : std_logic_vector(3 downto 0);        
+signal buttons_combined : std_logic_vector(2 downto 0);        
 signal sync_in: std_logic_vector(2 downto 0); 
 signal edge_in: std_logic_vector(2 downto 0); 
 signal code_in: std_logic_vector(7 downto 0); --no se usa en principio
@@ -85,7 +85,7 @@ begin
 buttons_combined(0) <= Corto;  -- Asignamos el primer botón al primer bit
 buttons_combined(1) <= Largo;  -- Asignamos el segundo botón al segundo bit
 buttons_combined(2) <= Leche;  -- Asignamos el tercer botón al tercer bit
-buttons_combined(3) <= RESET;  -- Asignamos el reset al cuarto bit
+--buttons_combined(3) <= RESET;  -- Asignamos el reset al cuarto bit
 
 inst_sinch: SYNCHRNZR port map( 
             CLK => clk, 

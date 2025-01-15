@@ -39,14 +39,14 @@ architecture Behavioral of EDGEDTCTR_tb is
     component EDGEDTCTR 
         port(
             CLK : in STD_LOGIC;
-            SYNC_IN : in STD_LOGIC;
-            EDGE : out STD_LOGIC
+            SYNC_IN : in std_logic_vector(2 downto 0);
+            EDGE : out std_logic_vector(2 downto 0)
         );
     end component;
     
     signal clk_s: std_logic;
-    signal sync_in_s: std_logic;
-    signal edge_s: std_logic;
+    signal sync_in_s: std_logic_vector(2 downto 0);
+    signal edge_s: std_logic_vector(2 downto 0);
     signal clk_tb: std_logic := '0';
     constant periodo_tb : time := 100ms;
     
@@ -62,14 +62,18 @@ begin
     
 stimuli : process
     begin
-        sync_in_s <= '1' after 5.5*periodo_tb; 
+        sync_in_s <= "001" after 5.5*periodo_tb; 
         wait for 1000ms; --Suponemos que la pulsación del botón (sea el que sea) es de 1s
-        sync_in_s <= '0'; 
-        wait for 3900ms; --Imaginamos que la cantidad de café es suficiente y pulsa para parar
-        sync_in_s <= '1';
-        wait for 1000ms; 
-        sync_in_s <= '0';
-        wait for 1000ms; 
+        sync_in_s <= "000"; 
+        wait for 4900ms; --Imaginamos que la cantidad de café es suficiente y pulsa para parar
+        sync_in_s <= "010"; --Probamos con el café largo
+        wait for 1000ms; --Duración de la pulsación 
+        sync_in_s <= "000";
+        wait for 6900ms; 
+        sync_in_s <= "100"; --Probamos con el café con leche
+        wait for 1000ms;
+        sync_in_s <= "000";
+        wait for 7900ms;
 assert false
       report "[SUCCESS]: simulation finished."
       severity failure;

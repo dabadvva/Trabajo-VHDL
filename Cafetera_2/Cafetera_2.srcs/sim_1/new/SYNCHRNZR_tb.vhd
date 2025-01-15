@@ -39,14 +39,14 @@ architecture Behavioral of SYNCHRNZR_tb is
     component SYNCHRNZR
         port(
         CLK : in std_logic;
-        ASYNC_IN : in std_logic;
-        SYNC_OUT : out std_logic
+        ASYNC_IN : in std_logic_vector(2 downto 0); --leche + largo + corto
+        SYNC_OUT : out std_logic_vector(2 downto 0)
         );
     end component;
     
     signal clk_s: std_logic;
-    signal async_in_s: std_logic;
-    signal sync_out_s: std_logic;
+    signal async_in_s: std_logic_vector(2 downto 0);
+    signal sync_out_s: std_logic_vector(2 downto 0);
     signal clk_tb: std_logic := '0';
     constant periodo_tb : time := 100ms;
     
@@ -61,13 +61,19 @@ begin
     
 stimuli:process 
     begin
-        async_in_s <= '1' after 4.9*periodo_tb; --Forzamos un cambio de señal cerca del flanco de subida del reloj
+        async_in_s <= "001" after 4.9*periodo_tb; --Forzamos un cambio de señal cerca del flanco de subida del reloj
         wait for 1000ms; --Suponemos que la pulsación del botón (sea el que sea) es de 1s
-        async_in_s <= '0'; 
+        async_in_s <= "000"; 
         wait for 4486ms; --Imaginamos que la cantidad de café es suficiente y pulsa para parar
-        async_in_s <= '1';
+        async_in_s <= "010";
         wait for 1000ms; 
-        async_in_s <= '0'; 
+        async_in_s <= "000"; 
+        wait for 6686ms; --Tiempos cercanos a cambios de flanco para compribar la correcta 
+                         --funcionalidad
+        async_in_s <= "100";
+        wait for 1000ms; 
+        async_in_s <= "000"; 
+        wait for 5000ms;
 assert false
       report "[SUCCESS]: simulation finished."
       severity failure;

@@ -35,8 +35,8 @@ use ieee.numeric_std.ALL;
 entity SYNCHRNZR is
     port (
        CLK : in std_logic;
-       ASYNC_IN : in std_logic_vector(3 downto 0); --leche + largo + corto
-       SYNC_OUT : out std_logic_vector(3 downto 0)
+       ASYNC_IN : in std_logic_vector(2 downto 0); --leche + largo + corto
+       SYNC_OUT : out std_logic_vector(2 downto 0)
     );
 end SYNCHRNZR;
 
@@ -44,7 +44,7 @@ architecture BEHAVIORAL of SYNCHRNZR is
     signal sreg_C : std_logic_vector(1 downto 0);  --corto
     signal sreg_L : std_logic_vector(1 downto 0);   --largo
     signal sreg_le : std_logic_vector(1 downto 0);  --leche
-    signal sreg_rst : std_logic_vector(1 downto 0);  --reset
+   -- signal sreg_rst : std_logic_vector(1 downto 0);  --reset
 begin
     process (CLK)
     begin
@@ -59,9 +59,9 @@ begin
         SYNC_OUT(2) <= sreg_le(1);           -- Asignar la salida sincronizada para "leche"
         sreg_le <= sreg_le(0) & ASYNC_IN(2); -- Actualizar el registro de "leche"
         
-        SYNC_OUT(3) <= sreg_rst(1);           -- Asignar la salida sincronizada para "reset"
-        sreg_rst <= sreg_rst(0) & ASYNC_IN(3); -- Actualizar el registro de "reset"
-
+      --  SYNC_OUT(3) <= sreg_rst(1);           -- Asignar la salida sincronizada para "reset"
+       -- sreg_rst <= sreg_rst(0) & ASYNC_IN(3); -- Actualizar el registro de "reset"
+       --El reset no se sincroniza!!
         end if;
     end process;
 end BEHAVIORAL;

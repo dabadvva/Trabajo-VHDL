@@ -67,9 +67,18 @@ begin
             -- Lógica para mantener enable_latched activa
             if enable = '1' then
                  enable_latched_var := '1'; -- Engancha la señal si se presiona un botón
-                 CE_latched_var := CE; -- Almacena el último valor válido de CE
+                 code <= (others => '0');
+                 case CE is
+                    when "001" =>
+                        CE_latched_var := "001"; -- Almacena el último valor válido de CE
+                    when "010" =>
+                        CE_latched_var := "010";
+                    when "100" =>
+                        CE_latched_var := "100";
+                    when others =>
+                        CE_latched_var := CE_latched_var;
+                 end case;
             end if;
-        
             -- Lógica del contador        
             if enable_latched_var = '1'  then 
                 case CE_latched_var is
@@ -97,11 +106,23 @@ begin
                 
                 case code_i is
                     when "00" & MAX_COUNT_C =>
-                        evnt := '1';
+                        if CE_latched_var = "001" then
+                            evnt := '1';
+                            code_i <=(others => '0');
+                            CE_latched_var := "000";
+                        end if;
                     when "0" & MAX_COUNT_L =>
-                        evnt := '1';
+                        if CE_latched_var = "010" then
+                            evnt := '1';
+                            code_i <=(others => '0');
+                            CE_latched_var := "000";
+                        end if;
                     when MAX_COUNT_Le =>
-                        evnt := '1';
+                        if CE_latched_var = "100" then
+                            evnt := '1';
+                            code_i <=(others => '0');
+                            CE_latched_var := "000";
+                        end if;
                     when others =>
                         evnt := '0';      
                  end case; 
