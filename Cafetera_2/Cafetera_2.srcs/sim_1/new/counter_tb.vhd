@@ -41,8 +41,8 @@ architecture Behavioral of counter_tb is
             CLK : in std_logic;
             CE : in std_logic_vector(2 downto 0);
             RST_N : in std_logic;
-            code : out std_logic_vector(7 downto 0); 
-            EVENT_DONE : out std_logic
+            code : out std_logic_vector(7 downto 0);
+            CE_latched : out std_logic_vector(2 downto 0)
         );
      end component;
      
@@ -53,15 +53,14 @@ architecture Behavioral of counter_tb is
      signal clk_tb: std_logic := '0';
      signal evnt_dn: std_logic;
      constant periodo_tb : time := 100ms;
-            
+   
 begin
     uut: counter 
         port map(
             clk => clk_s,
             ce => ce_s,
             rst_n => rst_n_s,
-            code => code_s,
-            event_done => evnt_dn
+            code => code_s
         );
         
         clk_tb <= not clk_tb after periodo_tb;

@@ -1,7 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../Cafetera_2.srcs/sources_1/imports/new/SYNCHRNZR.vhd" \
-"../../../../Cafetera_2.srcs/sim_1/new/SYNCHRNZR_tb.vhd" \
-
-# Do not sort compile order
-nosort

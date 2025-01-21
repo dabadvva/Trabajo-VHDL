@@ -40,12 +40,13 @@ architecture Behavioral of Top_tb is
         port(
             Largo : in std_logic;
             Corto : in std_logic;
-            P_ON : in std_logic;
+            P_ON_T : in std_logic;
             RESET : in std_logic;
             clk : in std_logic; --se cambia para que la señal de reloj global sea clk
             Leche : in std_logic;
             Bomba : out std_logic;
-            LED : out std_logic;
+            LED1 : inout std_logic;
+            LED2 : out std_logic;
             Valvula :  out std_logic 
      );
 end component;
@@ -55,12 +56,13 @@ end component;
     signal bomba_s: std_logic;
     signal p_on_s: std_logic;
     signal valvula_s: std_logic;
-    signal led_s: std_logic;
+    signal led1_s: std_logic;
+    signal led2_s: std_logic;
     
     signal reset_s: std_logic;
     signal clk_s: std_logic;
     signal clk_tb: std_logic := '0';
-    constant periodo_tb : time := 1ms;
+    constant periodo_tb : time := 100ms;
     
 begin
     uut: Top PORT MAP(
@@ -68,9 +70,12 @@ begin
         corto => corto_s,
         leche => leche_s,
         bomba => bomba_s,
-        p_on => p_on_s,
+        p_on_t => p_on_s,
         reset => reset_s,
-        clk => clk_s
+        clk => clk_s,
+        led1 => led1_s,
+        led2 => led2_s,
+        valvula => valvula_s
     );
 
     clk_tb <= not clk_tb after periodo_tb;
@@ -84,18 +89,17 @@ stimuli : process
         largo_s <= '1';
         wait for 1000 ms;
         largo_s <= '0';
-        wait for 20000 ms;
+        wait for 21000 ms;
         corto_s <= '1';
         wait for 1000ms;
         corto_s <= '0';
-        wait for 10000ms;
+        wait for 11000ms;
         leche_s <= '1';
         wait for 1000ms;
         leche_s <= '0';
-        wait for 30000 ms;
-        corto_s <= '0';
+        wait for 31000 ms;
+        p_on_s <= '0';
         wait for 5*periodo_tb;
-        leche_s <= '0';
  assert false
       report "[SUCCESS]: simulation finished."
       severity failure;

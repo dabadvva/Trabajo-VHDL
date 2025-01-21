@@ -38,11 +38,12 @@ entity Top is
            Corto : in std_logic; --boton1
            Largo : in std_logic; --boton2
            Leche : in std_logic; --boton3
-           P_ON : in std_logic; --boton4
+           P_ON_T : in std_logic; --boton4
            RESET : in std_logic; --boton5
            clk : in std_logic; --se cambia para que la señal de reloj global sea clk
            Bomba : out std_logic;
-           LED : out std_logic;
+           LED1 : inout std_logic;
+           LED2 : out std_logic;
            Valvula :  out std_logic 
      );
 end Top;
@@ -52,7 +53,8 @@ architecture Behavioral of Top is --definición básica de los componentes top, 
 signal buttons_combined : std_logic_vector(2 downto 0);        
 signal sync_in: std_logic_vector(2 downto 0); 
 signal edge_in: std_logic_vector(2 downto 0); 
-signal code_in: std_logic_vector(7 downto 0); --no se usa en principio
+signal code_s: std_logic_vector(7 downto 0); 
+signal CE_lat_s : std_logic_vector(2 downto 0);
 
           component SYNCHRNZR 
             port (
@@ -76,10 +78,24 @@ signal code_in: std_logic_vector(7 downto 0); --no se usa en principio
                CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
                RST_N : in std_logic;
                code : out std_logic_vector(7 downto 0); --Se cambia a 6b para que pueda contar hasta 50
-               EVENT_DONE : out std_logic --el led se enciende cuando se termina el tiempo de hacer un café ?
-            );
+               CE_latched : out std_logic_vector(2 downto 0)
+               );
           end component;
           
+          component controler
+            port (
+                CLK : in std_logic;
+                RST_N : in std_logic;
+                P_ON : in std_logic;
+                CODE_C : in std_logic_vector (7 downto 0);
+                EVENT_DONE : inout std_logic; --el led se enciende cuando se termina el tiempo de hacer un café ?
+                BOMBA_PROGRESS : out std_logic; --necesario para la activación de la bomba 
+                LED_PROGRESS : out std_logic;
+                MILK_PROGRESS : out std_logic; --necesario para la activación de la válvula de leche
+                CE_Lat : in std_logic_vector(2 downto 0)
+            );
+           end component;
+                
 begin
 
 buttons_combined(0) <= Corto;  -- Asignamos el primer botón al primer bit
@@ -102,10 +118,20 @@ inst_detct: EDGEDTCTR  port map (
 inst_counter: counter PORT MAP ( 
             CLK => clk, 
             CE => edge_in, 
-            RST_N => RESET, --el reset se implementa en el counter
-            EVENT_DONE => LED
+            RST_N => RESET, 
+            code => code_s,
+            CE_latched => CE_lat_s
         ); 
       
---digctrl <= not digsel; --necesidad real de esta señal?
-
+inst_controler: controler PORT MAP(
+            CLK => clk,
+            RST_N => RESET,
+            CODE_C => code_s,
+            BOMBA_PROGRESS => Bomba,
+            EVENT_DONE => LED1,
+            LED_PROGRESS => LED2,
+            MILK_PROGRESS => Valvula,
+            CE_Lat => CE_lat_s,
+            P_ON => P_ON_T
+        );
 end Behavioral;
