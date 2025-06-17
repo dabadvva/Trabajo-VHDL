@@ -1,0 +1,4 @@
+Time resolution is 1 ps
+Failure: [SUCCESS] Simulation finished.
+Time: 650 ns  Iteration: 0  Process: /E1_TB/p1  File: C:/Users/davil/Cafetera/Trabajo-VHDL/Ej6_16-17/Ej6_16-17.srcs/sim_1/imports/sed1617julc7-sol/e1_tb.vhd
+$finish called at time : 650 ns : File "C:/Users/davil/Cafetera/Trabajo-VHDL/Ej6_16-17/Ej6_16-17.srcs/sim_1/imports/sed1617julc7-sol/e1_tb.vhd" Line 50

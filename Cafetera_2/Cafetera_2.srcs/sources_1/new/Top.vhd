@@ -78,7 +78,8 @@ signal CE_lat_s : std_logic_vector(2 downto 0);
                CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
                RST_N : in std_logic;
                code : out std_logic_vector(7 downto 0); --Se cambia a 6b para que pueda contar hasta 50
-               CE_latched : out std_logic_vector(2 downto 0)
+               CE_latched : out std_logic_vector(2 downto 0);
+               P_ON_C : in std_logic
                );
           end component;
           
@@ -120,7 +121,8 @@ inst_counter: counter PORT MAP (
             CE => edge_in, 
             RST_N => RESET, 
             code => code_s,
-            CE_latched => CE_lat_s
+            CE_latched => CE_lat_s,
+            P_ON_C => P_ON_T
         ); 
       
 inst_controler: controler PORT MAP(

@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../Cafetera_3.srcs/sources_1/new/Frec_div.vhd" \
+"../../../../../Cafetera_3.srcs/sim_1/new/Frec_div_tb.vhd" \
+
+# Do not sort compile order
+nosort

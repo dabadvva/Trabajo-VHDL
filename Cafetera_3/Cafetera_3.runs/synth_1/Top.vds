@@ -1,0 +1,287 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Tue Jun 17 13:11:32 2025
+# Process ID: 12732
+# Current directory: C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.runs/synth_1
+# Command line: vivado.exe -log Top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Top.tcl
+# Log file: C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.runs/synth_1/Top.vds
+# Journal file: C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.runs/synth_1\vivado.jou
+# Running On        :LAPTOP-H6475K6F
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26100
+# Processor Detail  :12th Gen Intel(R) Core(TM) i5-12450H
+# CPU Frequency     :2496 MHz
+# CPU Physical cores:8
+# CPU Logical cores :12
+# Host memory       :8300 MB
+# Swap memory       :16106 MB
+# Total Virtual     :24406 MB
+# Available Virtual :4927 MB
+#-----------------------------------------------------------
+source Top.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:09 . Memory (MB): peak = 487.430 ; gain = 201.465
+Command: read_checkpoint -auto_incremental -incremental C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/utils_1/imports/synth_1/Top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/utils_1/imports/synth_1/Top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top Top -part xc7a100tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Device 21-9227] Part: xc7a100tcsg324-1 does not have CEAM library.
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 33852
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1361.801 ; gain = 448.438
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'Top' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:52]
+INFO: [Synth 8-3491] module 'Frec_div' declared at 'C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/new/Frec_div.vhd:6' bound to instance 'inst_frec_div' of component 'Frec_div' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:119]
+INFO: [Synth 8-638] synthesizing module 'Frec_div' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/new/Frec_div.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'Frec_div' (0#1) [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/new/Frec_div.vhd:19]
+INFO: [Synth 8-3491] module 'SYNCHRNZR' declared at 'C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/SYNCHRNZR.vhd:35' bound to instance 'inst_sinch' of component 'SYNCHRNZR' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:126]
+INFO: [Synth 8-638] synthesizing module 'SYNCHRNZR' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/SYNCHRNZR.vhd:43]
+WARNING: [Synth 8-7143] Equality comparison of non constant with static metalogical value is evaluated as 'false'. This may cause simulation-synthesis differences [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/SYNCHRNZR.vhd:53]
+WARNING: [Synth 8-7143] Equality comparison of non constant with static metalogical value is evaluated as 'false'. This may cause simulation-synthesis differences [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/SYNCHRNZR.vhd:59]
+WARNING: [Synth 8-7143] Equality comparison of non constant with static metalogical value is evaluated as 'false'. This may cause simulation-synthesis differences [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/SYNCHRNZR.vhd:65]
+INFO: [Synth 8-256] done synthesizing module 'SYNCHRNZR' (0#1) [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/SYNCHRNZR.vhd:43]
+INFO: [Synth 8-3491] module 'EDGEDTCTR' declared at 'C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/EDGEDTCTR.vhd:55' bound to instance 'inst_detct' of component 'EDGEDTCTR' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:132]
+INFO: [Synth 8-638] synthesizing module 'EDGEDTCTR' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/EDGEDTCTR.vhd:63]
+INFO: [Synth 8-256] done synthesizing module 'EDGEDTCTR' (0#1) [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/EDGEDTCTR.vhd:63]
+INFO: [Synth 8-3491] module 'counter' declared at 'C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/counter.vhd:33' bound to instance 'inst_counter' of component 'counter' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:138]
+INFO: [Synth 8-638] synthesizing module 'counter' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/counter.vhd:44]
+INFO: [Synth 8-256] done synthesizing module 'counter' (0#1) [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/counter.vhd:44]
+INFO: [Synth 8-3491] module 'controler' declared at 'C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/controler.vhd:35' bound to instance 'inst_controler' of component 'controler' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:147]
+INFO: [Synth 8-638] synthesizing module 'controler' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/controler.vhd:50]
+INFO: [Synth 8-256] done synthesizing module 'controler' (0#1) [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/controler.vhd:50]
+INFO: [Synth 8-256] done synthesizing module 'Top' (0#1) [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/new/Top.vhd:52]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1472.852 ; gain = 559.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1472.852 ; gain = 559.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1472.852 ; gain = 559.488
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1472.852 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/constrs_1/imports/Downloads/Nexys4DDR_Master.xdc]
+Finished Parsing XDC File [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/constrs_1/imports/Downloads/Nexys4DDR_Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/constrs_1/imports/Downloads/Nexys4DDR_Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/Top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1573.953 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1573.953 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'EDGE_reg' [C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.srcs/sources_1/imports/sources_1/imports/new/EDGEDTCTR.vhd:81]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 2     
+	   2 Input   10 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 2     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input   10 Bit        Muxes := 7     
+	   4 Input   10 Bit        Muxes := 2     
+	   4 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 2     
+	   4 Input    1 Bit        Muxes := 5     
+	   2 Input    1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------+---------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name                  | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+---------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Top         | inst_detct/sreg_C_reg[0]  | 4      | 1     | NO           | YES                | YES               | 1      | 0       | 
+|Top         | inst_detct/sreg_L_reg[0]  | 4      | 1     | NO           | YES                | YES               | 1      | 0       | 
+|Top         | inst_detct/sreg_le_reg[0] | 4      | 1     | NO           | YES                | YES               | 1      | 0       | 
++------------+---------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     2|
+|2     |CARRY4 |    32|
+|3     |LUT1   |     1|
+|4     |LUT2   |     7|
+|5     |LUT3   |     4|
+|6     |LUT4   |    88|
+|7     |LUT5   |    15|
+|8     |LUT6   |    31|
+|9     |SRL16E |     3|
+|10    |FDCE   |    96|
+|11    |FDRE   |     9|
+|12    |LD     |     3|
+|13    |IBUF   |     6|
+|14    |OBUF   |     4|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1573.953 ; gain = 660.590
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:22 . Memory (MB): peak = 1573.953 ; gain = 559.488
+Synthesis Optimization Complete : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 1573.953 ; gain = 660.590
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1573.953 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 35 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1573.953 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 3 instances were transformed.
+  LD => LDCE: 3 instances
+
+Synth Design complete | Checksum: c7ca3ee6
+INFO: [Common 17-83] Releasing license: Synthesis
+39 Infos, 5 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1573.953 ; gain = 1079.406
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1573.953 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.runs/synth_1/Top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file Top_utilization_synth.rpt -pb Top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Jun 17 13:12:14 2025...

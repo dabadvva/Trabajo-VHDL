@@ -66,6 +66,11 @@ begin
             led_f := '0'; 
             mlk_prog := '0';
             CE_latched_var := "000";
+        elsif (P_ON = '0') then
+             EVENT_DONE <= '0';
+             BOMBA_PROGRESS <= '0';
+             LED_PROGRESS <= '0';
+             MILK_PROGRESS <= '0';
         elsif (rising_edge(CLK) and P_ON /= '0') then
             led_f := '0';
             code_s := unsigned(CODE_C);
@@ -117,11 +122,7 @@ begin
              BOMBA_PROGRESS <= bomb;
              LED_PROGRESS <= led_pr;
              MILK_PROGRESS <= mlk_prog;
-         elsif (P_ON = '0') then
-             EVENT_DONE <= '0';
-             BOMBA_PROGRESS <= '0';
-             LED_PROGRESS <= '0';
-             MILK_PROGRESS <= '0';
+         
          end if;
      end process;                  
 end Behavioral;

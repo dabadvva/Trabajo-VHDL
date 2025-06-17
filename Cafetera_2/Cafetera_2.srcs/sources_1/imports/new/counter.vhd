@@ -36,7 +36,8 @@ entity counter is
        CE : in std_logic_vector(2 downto 0); -- el counter enable activa el contador
        RST_N : in std_logic;
        code : out std_logic_vector(7 downto 0); --Se cambia a 8b para que pueda contar hasta 150
-       CE_latched : out std_logic_vector(2 downto 0)
+       CE_latched : out std_logic_vector(2 downto 0);
+       P_ON_C : in std_logic
     );
 end counter;
 
@@ -62,7 +63,7 @@ begin
             enable_latched_var := '0'; -- Reinicia la variable en un reset
             CE_latched_var := "000"; -- Reinicia el valor latched de CE
 
-        elsif rising_edge(CLK) then 
+        elsif (rising_edge(CLK) and P_ON_C /= '0') then 
             -- Lógica para mantener enable_latched activa
             if enable = '1' then
                  enable_latched_var := '1'; -- Engancha la señal si se presiona un botón

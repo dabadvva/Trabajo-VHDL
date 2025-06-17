@@ -1,0 +1,7 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/davil/Cafetera/Trabajo-VHDL/Cafetera_3/Cafetera_3.sim/sim_1/impl/func/xsim/Frec_div_tb_func_impl.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'EDGEDTCTR'
+INFO: [VRFC 10-3107] analyzing entity 'Frec_div'
+INFO: [VRFC 10-3107] analyzing entity 'SYNCHRNZR'
+INFO: [VRFC 10-3107] analyzing entity 'controler'
+INFO: [VRFC 10-3107] analyzing entity 'counter'
+INFO: [VRFC 10-3107] analyzing entity 'Top'
